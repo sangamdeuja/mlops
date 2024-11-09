@@ -29,9 +29,12 @@ jobs:
 
     - name: Terraform Init
       run: terraform init
+      working-directory: mlops/infrastructure
 
     - name: Terraform Plan
       run: terraform plan -out=tfplan
+      working-directory: mlops/infrastructure
 
     - name: Terraform Apply
       run: terraform apply tfplan
+      working-directory: mlops/infrastructure
