@@ -26,6 +26,11 @@ jobs:
       uses: hashicorp/setup-terraform@v3
       with:
         terraform_version: 1.5.7  # Change to your preferred version
+    
+    - name: Check Directory Structure
+      run: |
+        pwd
+        ls -R
 
     - name: Terraform Init
       run: terraform init
