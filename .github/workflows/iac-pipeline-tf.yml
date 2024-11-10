@@ -13,10 +13,10 @@ jobs:
       ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
       ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
       TF_VAR_resource_group_name: ${{ secrets.TF_VAR_resource_group_name }}
-      TF_VAR_location: ${{ secrets.TF_VAR_location }}
+      #TF_VAR_location: ${{ secrets.TF_VAR_location }}
       TF_VAR_storage_account_name: ${{ secrets.TF_VAR_storage_account_name }}
-      TF_VAR_account_tier: ${{ secrets.TF_VAR_account_tier }}
-      TF_VAR_account_replication_type: ${{ secrets.TF_VAR_account_replication_type }}
+      #TF_VAR_account_tier: ${{ secrets.TF_VAR_account_tier }}
+      #TF_VAR_account_replication_type: ${{ secrets.TF_VAR_account_replication_type }}
 
     steps:
     - name: Checkout code
