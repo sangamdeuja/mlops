@@ -1,17 +1,31 @@
-variable "resource_group_name" {
-  description = "The name of the resource group"
+variable "location" {
   type        = string
+  description = "The location for the resources"
 }
 
-variable "location" {
-  description = "The Azure region for the resources"
+variable "resource_group_name" {
   type        = string
-  default     = "northeurope"
+  description = "The name of the resource group"
 }
 
 variable "storage_account_name" {
-  description = "The name of the storage account"
   type        = string
+  description = "The name of the storage account"
+}
+
+variable "application_insights_name" {
+  type        = string
+  description = "The name of the Application Insights"
+}
+
+variable "key_vault_name" {
+  type        = string
+  description = "The name of the Key Vault"
+}
+
+variable "ml_workspace_name" {
+  type        = string
+  description = "The name of the Machine Learning workspace"
 }
 
 variable "account_tier" {

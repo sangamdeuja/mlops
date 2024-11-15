@@ -1,0 +1,6 @@
+location                  = "northeurope"
+resource_group_name       = "sangammlops"
+storage_account_name      = "sangammlopstsa"
+application_insights_name = "sangammlopsappinsights"
+key_vault_name            = "sangammlopskeyvault"
+ml_workspace_name         = "sangammlopsworkspace"
