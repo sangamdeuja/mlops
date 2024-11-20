@@ -1,5 +1,5 @@
 location                  = "northeurope"
-resource_group_name       = "sangammlops"
+resource_group_name       = "sangammlops1"
 storage_account_name      = "sangammlopstsa"
 application_insights_name = "sangammlopsappinsights"
 key_vault_name            = "sangammlopskeyvault"
