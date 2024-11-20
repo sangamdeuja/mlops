@@ -4,11 +4,6 @@
 Prepares raw data and provides training, validation and test datasets
 """
 
-# Copyright (c) Microsoft Corporation. All rights reserved.
-# Licensed under the MIT License.
-"""
-Prepares raw data and provides training, validation and test datasets
-"""
 
 import argparse
 
@@ -49,7 +44,7 @@ CAT_NOM_COLS = [
 
 CAT_ORD_COLS = [
 ]
-TARGET_COL = "cost"
+
 
 NUMERIC_COLS = [
     "distance",
@@ -72,14 +67,6 @@ NUMERIC_COLS = [
     "dropoff_second",
 ]
 
-CAT_NOM_COLS = [
-    "store_forward",
-    "vendor",
-]
-
-CAT_ORD_COLS = [
-]
-
 def parse_args():
     '''Parse input arguments'''
     '''Parse input arguments'''
@@ -90,7 +77,7 @@ def parse_args():
     parser.add_argument("--val_data", type=str, help="Path to test dataset")
     parser.add_argument("--test_data", type=str, help="Path to test dataset")
 
-    parser.add_argument("--enable_monitoring", type=str, help="enable logging to ADX")
+    parser.add_argument("--enable_monitoring", type=str, default=True,help="enable logging to ADX")
     parser.add_argument("--table_name", type=str, default="mlmonitoring", help="Table name in ADX for logging")
 
     args = parser.parse_args()
@@ -102,8 +89,7 @@ def log_training_data(df, table_name):
     collector = Online_Collector(table_name)
     collector.batch_collect(df)
 
-def main(args):
-    '''Read, split, and save datasets'''
+
 def main(args):
     '''Read, split, and save datasets'''
 
