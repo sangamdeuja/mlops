@@ -17,6 +17,11 @@ jobs:
       uses: azure/login@v2
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
+        
+    # Step 2.1: Login to Azure using Service Principal Secret
+    - name: Install Azure ML CLI Extension
+      run: |
+        az extension add --name ml -y || az extension update --name ml
 
     # Step 3: Register Environment
     - name: Register Azure ML Environment
