@@ -16,11 +16,7 @@ jobs:
     - name: Login to Azure
       uses: azure/login@v2
       with:
-        auth-type: secret
-        client-id: ${{ secrets.ARM_CLIENT_ID }}
-        client-secret: ${{ secrets.ARM_CLIENT_SECRET }}
-        tenant-id: ${{ secrets.ARM_TENANT_ID }}
-        subscription-id: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
 
     # Step 3: Register Environment
     - name: Register Azure ML Environment
