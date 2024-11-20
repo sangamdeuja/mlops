@@ -3,9 +3,6 @@ name: Deploy Model Training Pipeline
 on:
   workflow_dispatch:  # Enables manual trigger of the workflow
 
-permissions:
-  id-token: write
-  contents: read
 
 jobs:
   register-environment:
@@ -18,7 +15,7 @@ jobs:
         uses: azure/login@v2
         with:
           client-id: ${{ secrets.ARM_CLIENT_ID }}
-          #client-secret: ${{ secrets.ARM_CLIENT_SECRET }}
+          client-secret: ${{ secrets.ARM_CLIENT_SECRET }}
           tenant-id: ${{ secrets.ARM_TENANT_ID }}
           subscription-id: ${{ secrets.ARM_SUBSCRIPTION_ID }}
 
@@ -42,7 +39,7 @@ jobs:
         uses: azure/login@v2
         with:
           client-id: ${{ secrets.ARM_CLIENT_ID }}
-          #client-secret: ${{ secrets.ARM_CLIENT_SECRET }}
+          client-secret: ${{ secrets.ARM_CLIENT_SECRET }}
           tenant-id: ${{ secrets.ARM_TENANT_ID }}
           subscription-id: ${{ secrets.ARM_SUBSCRIPTION_ID }}
 
@@ -65,7 +62,7 @@ jobs:
         uses: azure/login@v2
         with:
           client-id: ${{ secrets.ARM_CLIENT_ID }}
-          #client-secret: ${{ secrets.ARM_CLIENT_SECRET }}
+          client-secret: ${{ secrets.ARM_CLIENT_SECRET }}
           tenant-id: ${{ secrets.ARM_TENANT_ID }}
           subscription-id: ${{ secrets.ARM_SUBSCRIPTION_ID }}
 
@@ -91,7 +88,7 @@ jobs:
         uses: azure/login@v2
         with:
           client-id: ${{ secrets.ARM_CLIENT_ID }}
-          #client-secret: ${{ secrets.ARM_CLIENT_SECRET }}
+          client-secret: ${{ secrets.ARM_CLIENT_SECRET }}
           tenant-id: ${{ secrets.ARM_TENANT_ID }}
           subscription-id: ${{ secrets.ARM_SUBSCRIPTION_ID }}
 
