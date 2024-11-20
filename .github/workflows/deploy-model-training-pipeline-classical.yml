@@ -42,7 +42,7 @@ jobs:
       run: |
         az ml compute create --name cpu-cluster \
           --type AmlCompute \
-          --min-instances 1 --max-instances 2 \
+          --min-instances 0 --max-instances 1 \
           --size Standard_DS3_v2 \
           --resource-group ${{ secrets.AML_RESOURCE_GROUP }} \
           --workspace-name ${{ secrets.AML_WORKSPACE_NAME }}
