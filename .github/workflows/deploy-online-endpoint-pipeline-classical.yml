@@ -1,8 +1,8 @@
 name: Deploy and Test Online Endpoint and Deployment
 
 on:
-  workflow_dispatch: # Enables manual triggering of the workflow
-
+  workflow_dispatch:  # Enables manual triggering of the workflow 
+ 
 jobs:
   deploy-online-endpoint:
     runs-on: ubuntu-latest
@@ -23,14 +23,19 @@ jobs:
       run: |
         az extension add --name ml -y || az extension update --name ml
 
-    # Step 4: Create or Update Online Endpoint
+    # Step 4: Ensure azureml-mlflow is installed
+    - name: Install azureml-mlflow
+      run: |
+        pip install azureml-mlflow --upgrade
+
+    # Step 5: Create or Update Online Endpoint
     - name: Create or Update Online Endpoint
       run: |
         az ml online-endpoint create --file mlops/azureml/deploy/online-endpoint.yml \
           --resource-group ${{ secrets.AML_RESOURCE_GROUP }} \
           --workspace-name ${{ secrets.AML_WORKSPACE_NAME }}
 
-    # Step 5: Create or Update Online Deployment
+    # Step 6: Create or Update Online Deployment
     - name: Create or Update Online Deployment
       run: |
         az ml online-deployment create --file mlops/azureml/deploy/online-deployment.yml \
@@ -38,7 +43,7 @@ jobs:
           --workspace-name ${{ secrets.AML_WORKSPACE_NAME }} \
           --all-traffic
 
-    # Step 6: Test the Deployed Model using taxi-request.json
+    # Step 7: Test the Deployed Model using taxi-request.json
     - name: Test Online Endpoint
       run: |
         curl -X POST \
@@ -47,10 +52,9 @@ jobs:
           -d @mlops/azureml/deploy/taxi-request.json \
           https://$taxi-fare-online.${{ secrets.AML_WORKSPACE_NAME }}.azurewebsites.net/score
 
-    # Optional Step 7: Validate the Response (e.g., Check Status or Output)
+    # Optional Step 8: Validate the Response (e.g., Check Status or Output)
     - name: Validate Model Response
       run: |
-        # Assuming taxi-request.json contains the correct input for the model
         response=$(curl -s -X POST \
           -H "Content-Type: application/json" \
           -H "Authorization: Bearer ${{ secrets.AML_API_KEY }}" \
@@ -61,7 +65,7 @@ jobs:
         # Optionally, add logic to check if the response is valid (e.g., status code, expected output)
         if [[ $response == *"error"* ]]; then
           echo "Test failed!"
-          exit 1
-        else
-          echo "Test passed!"
+          exit 1 
+        else 
+          echo "Test passed!" 
         fi
