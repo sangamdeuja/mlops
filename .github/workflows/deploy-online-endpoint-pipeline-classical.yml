@@ -23,10 +23,10 @@ jobs:
       run: |
         az extension add --name ml -y || az extension update --name ml
 
-    # Step 4: Ensure azureml-mlflow is installed
-    - name: Install azureml-mlflow
+    # Step 4: Ensure the correct versions of required packages are installed
+    - name: Install azureml-mlflow and azure-ai-ml
       run: |
-        pip install azureml-mlflow --upgrade
+        pip install azureml-mlflow==1.38.0 azure-ai-ml==1.0.0 --upgrade
 
     # Step 5: Create or Update Online Endpoint
     - name: Create or Update Online Endpoint
@@ -65,7 +65,7 @@ jobs:
         # Optionally, add logic to check if the response is valid (e.g., status code, expected output)
         if [[ $response == *"error"* ]]; then
           echo "Test failed!"
-          exit 1 
-        else 
-          echo "Test passed!" 
-        fi
+          exit 1  
+        else  
+          echo "Test passed!"  
+        fi 
