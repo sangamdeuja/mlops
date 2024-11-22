@@ -1,7 +1,7 @@
-name: Deploy Model to Online Endpoint
+name: Deploy and Test Online Endpoint and Deployment
 
 on:
-  workflow_dispatch: # Enable manual triggering of this pipeline
+  workflow_dispatch: # Enables manual triggering of the workflow
 
 jobs:
   deploy-online-endpoint:
@@ -18,42 +18,50 @@ jobs:
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-    # Step 2.1: Install Azure ML CLI Extension
+    # Step 3: Install Azure ML CLI Extension
     - name: Install Azure ML CLI Extension
       run: |
         az extension add --name ml -y || az extension update --name ml
 
-    # Step 3: Create or Update Online Endpoint
+    # Step 4: Create or Update Online Endpoint
     - name: Create or Update Online Endpoint
       run: |
-        az ml online-endpoint create --name my-online-endpoint \
-          --file mlops/azureml/deploy/endpoint.yml \
+        az ml online-endpoint create --file mlops/azureml/deploy/online-endpoint.yml \
           --resource-group ${{ secrets.AML_RESOURCE_GROUP }} \
           --workspace-name ${{ secrets.AML_WORKSPACE_NAME }}
 
-    # Step 4: Deploy Model to Endpoint
-    - name: Deploy Model to Endpoint
+    # Step 5: Create or Update Online Deployment
+    - name: Create or Update Online Deployment
       run: |
-        az ml online-deployment create --name blue-deployment \
-          --endpoint-name my-online-endpoint \
-          --file mlops/azureml/deploy/deployment.yml \
-          --resource-group ${{ secrets.AML_RESOURCE_GROUP }} \
-          --workspace-name ${{ secrets.AML_WORKSPACE_NAME }}
-
-    # Step 5: Test the Endpoint with Test Data
-    - name: Test Endpoint
-      run: |
-        # Locate the test data file (assumes it's under the same directory as training data)
-        TEST_DATA_PATH="mlops/azureml/train/test_data.json"
-
-        # Extract the endpoint URL dynamically
-        ENDPOINT_URL=$(az ml online-endpoint show --name my-online-endpoint \
+        az ml online-deployment create --file mlops/azureml/deploy/online-deployment.yml \
           --resource-group ${{ secrets.AML_RESOURCE_GROUP }} \
           --workspace-name ${{ secrets.AML_WORKSPACE_NAME }} \
-          --query scoring_uri -o tsv)
+          --all-traffic
 
-        # Send the test data to the endpoint using curl
-        RESPONSE=$(curl -X POST -H "Content-Type: application/json" \
-          -d @$TEST_DATA_PATH $ENDPOINT_URL)
+    # Step 6: Test the Deployed Model using taxi-request.json
+    - name: Test Online Endpoint
+      run: |
+        curl -X POST \
+          -H "Content-Type: application/json" \
+          -H "Authorization: Bearer ${{ secrets.AML_API_KEY }}" \
+          -d @mlops/azureml/deploy/taxi-request.json \
+          https://$taxi-fare-online.${{ secrets.AML_WORKSPACE_NAME }}.azurewebsites.net/score
+
+    # Optional Step 7: Validate the Response (e.g., Check Status or Output)
+    - name: Validate Model Response
+      run: |
+        # Assuming taxi-request.json contains the correct input for the model
+        response=$(curl -s -X POST \
+          -H "Content-Type: application/json" \
+          -H "Authorization: Bearer ${{ secrets.AML_API_KEY }}" \
+          -d @mlops/azureml/deploy/taxi-request.json \
+          https://$taxi-fare-online.${{ secrets.AML_WORKSPACE_NAME }}.azurewebsites.net/score)
         
-        echo "Test Endpoint Response: $RESPONSE"
+        echo "Model response: $response"
+        # Optionally, add logic to check if the response is valid (e.g., status code, expected output)
+        if [[ $response == *"error"* ]]; then
+          echo "Test failed!"
+          exit 1
+        else
+          echo "Test passed!"
+        fi
