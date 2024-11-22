@@ -84,10 +84,6 @@ def parse_args():
 
     return args
 
-def log_training_data(df, table_name):
-    from obs.collector import Online_Collector
-    collector = Online_Collector(table_name)
-    collector.batch_collect(df)
 
 
 def main(args):
@@ -126,8 +122,6 @@ def main(args):
     val.to_parquet((Path(args.val_data) / "val.parquet"))
     test.to_parquet((Path(args.test_data) / "test.parquet"))
 
-    if (args.enable_monitoring.lower() == 'true' or args.enable_monitoring == '1' or args.enable_monitoring.lower() == 'yes'):
-        log_training_data(data, args.table_name)
 
 
 
