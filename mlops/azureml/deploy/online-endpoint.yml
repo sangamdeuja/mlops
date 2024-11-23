@@ -1,4 +1,4 @@
 $schema: https://azuremlschemas.azureedge.net/latest/managedOnlineEndpoint.schema.json
-name: taxi-fare-online-sa
+name: taxi-fare-online-san
 description: taxi cost online endpoint
 auth_mode: key
