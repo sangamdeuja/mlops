@@ -1,3 +1,4 @@
+name: taxienv1
 channels:
   - defaults
   - anaconda
