@@ -2,7 +2,7 @@ $schema: https://azuremlschemas.azureedge.net/latest/managedOnlineDeployment.sch
 name: blue
 endpoint_name: taxi-fare-online-san
 model: azureml:taxi-model@latest
-environment: azureml:taxi-env:1
+environment: azureml:taxi-train-env:1
 code_configuration:
     code: deploy
     scoring_script: score.py

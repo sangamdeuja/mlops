@@ -28,8 +28,8 @@ jobs:
       run: |
         az ml environment create --file mlops/azureml/train/train-env.yml \
           --resource-group ${{ secrets.AML_RESOURCE_GROUP }} \
-          --workspace-name ${{ secrets.AML_WORKSPACE_NAME }} \
-          --name taxi-env
+          --workspace-name ${{ secrets.AML_WORKSPACE_NAME }} 
+          
 
     # Step 4: Register Dataset
     - name: Register Azure ML Dataset
