@@ -1,4 +1,4 @@
-name: taxienv1
+name: train-env
 channels:
   - defaults
   - anaconda

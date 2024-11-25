@@ -39,18 +39,18 @@ jobs:
           --all-traffic
 
 
-    # Optional Step 8: Validate the Response (e.g., Check Status or Output)
-    - name: Validate Model Response
-      run: |
-        # Step 1: Get an Authorization Token using Azure CLI
-        token=$(az account get-access-token --resource https://ml.azure.com --query accessToken -o tsv)
-
-        # Step 2: Make the API Request to the Endpoint
-        response=$(curl -s -X POST \
-          -H "Content-Type: application/json" \
-          -H "Authorization: Bearer $token" \
-          -d @mlops/data/taxi-request.json \
-          https://$taxi-fare-online.${{ secrets.AML_WORKSPACE_NAME }}.azurewebsites.net/score)
-
-        # Step 3: Print the Response
-        echo "Model response: $response"
+#    # Optional Step 8: Validate the Response (e.g., Check Status or Output)
+#    - name: Validate Model Response
+#      run: |
+#        # Step 1: Get an Authorization Token using Azure CLI
+#        token=$(az account get-access-token --resource https://ml.azure.com --query accessToken -o tsv)
+#
+#        # Step 2: Make the API Request to the Endpoint
+#        response=$(curl -s -X POST \
+#          -H "Content-Type: application/json" \
+#          -H "Authorization: Bearer $token" \
+#          -d @mlops/data/taxi-request.json \
+#          https://$taxi-fare-online.${{ secrets.AML_WORKSPACE_NAME }}.azurewebsites.net/score)
+#
+#        # Step 3: Print the Response
+#        echo "Model response: $response"
