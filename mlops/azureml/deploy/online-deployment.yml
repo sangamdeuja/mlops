@@ -1,6 +1,6 @@
 $schema: https://azuremlschemas.azureedge.net/latest/managedOnlineDeployment.schema.json
 name: blue
-endpoint_name: taxi-fare-online-ep
+endpoint_name: taxi-fare-online-ep1
 model: azureml:taxi-model@latest
 code_configuration:
     code: .
