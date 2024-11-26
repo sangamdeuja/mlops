@@ -15,7 +15,7 @@ def init():
     This is run once during the deployment initialization.
     """
     global model
-    model_path = os.path.join(os.environ.get("AZUREML_MODEL_DIR"), "taxi-model.pkl")
+    model_path = os.path.join(os.environ.get("AZUREML_MODEL_DIR"), "model.pkl")
     model = joblib.load(model_path)
 
 def run(input_data: str):
