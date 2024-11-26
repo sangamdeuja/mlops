@@ -23,7 +23,7 @@ def run(input_data: str):
     Run inference on the input data.
     This function is invoked for each HTTP request.
     """
-    data=json.loads(input_data)
+    data=json.loads(input_data)["input_data"]
     data=np.array(data)
     prediction=model.predict(data)
     response = {
