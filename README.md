@@ -33,12 +33,12 @@ This repository guides you through orchestrating an Azure ML workspace, performi
 - modify the variables in infrastructure/terraform.tfvars 
 - push the code in your github
 - create service principle using App registration and assign contributor role at subscription level.
-- Create client secret and save the value
-- Store the repository secrets in github. Impelementing steps 4-6 is also described in [this link](https://learn.microsoft.com/en-us/azure/machine-learning/how-to-setup-mlops-github-azure-ml?view=azureml-api-2&tabs=azure-portal)
-- You are now ready to experiment. Go to Actions in Github and it will have 3 workflows.
+- create client secret and save the value
+- store the repository secrets in github. Impelementing steps 4-6 is also described in [this link](https://learn.microsoft.com/en-us/azure/machine-learning/how-to-setup-mlops-github-azure-ml?view=azureml-api-2&tabs=azure-portal)
+- you are now ready to experiment. Go to Actions in Github and it will have 3 workflows.
     - select the Deploy Azure Resources workflow and click run workflow. It takes sometime to provision you your ml workspace. Once the resource are deployed verify them from azure portal/cli
     - select the Deploy Model Training Pipeline and click run workflow. It takes a bit long time to provision your docker environment and initiate the training pipeline. Once the workflow completes, go to your azure ml workspace in the portal and select pipeline and navigate different components in UI, if you want to check the logs double click the component and check the logs. Those components turns green from gray-->blue-->geen which indicates the run is successful. If you see red then there are some issue. You can check the logs. Make sure the pipeline run is successful.
-    - Finally, select the Deploy and Test Online Endpoint and Deployment and click run workflow. If the run is successful you will have a working endpoint. You can test the online endpoint from the portal as described in the same link as in step 6 
+    - finally, select the Deploy and Test Online Endpoint and Deployment and click run workflow. If the run is successful you will have a working endpoint. You can test the online endpoint from the portal as described in the same link as in step 6 
 
 ## Debugging
 ### Debugging Deploy Azure Resources Workflow
