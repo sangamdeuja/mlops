@@ -10,7 +10,7 @@
 - V2 is an excellent reference for those with some experience who understand the concepts and can modify the setup as needed. Microsoft provides comprehensive [documentation](https://learn.microsoft.com/en-us/azure/machine-learning/how-to-setup-mlops-github-azure-ml?view=azureml-api-2&tabs=azure-shell) for its implementation.
 - And yet, there are still several challenges you may encounter during implementation. For instance, the training pipeline and online deployment pipeline may fail due to issues with building the container image on top of the provided base image, often caused by dependency conflicts.
 
-This repository guides you through orchestrating an Azure ML workspace, performing classical ML training, and deploying an online endpoint using a similar template and the same data as in V
+This repository guides you through orchestrating an Azure ML workspace, performing classical ML training, and deploying an online endpoint using a similar template and the same data as in V2
 ## Using this repo
 ### Pre-requisites 
 - basic knowledge in azure cloud, azure ML and azure cli
